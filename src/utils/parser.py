@@ -243,7 +243,7 @@ def parse_ground_truth(example: Dict[str, Any], data_name):
     if data_name in ["math", 'ocw']:
         gt_cot = example['solution']
         gt_ans = extract_answer(gt_cot)
-    elif data_name == "gsm8k":
+    elif data_name == "gsm8k" or data_name == "custom":
         gt_cot, gt_ans = example['answer'].split("####")
     elif data_name == "gsm-hard":
         gt_cot, gt_ans = example['code'], example['target']

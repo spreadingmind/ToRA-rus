@@ -36,9 +36,11 @@ def load_data(data_name, split, data_dir='./data'):
         elif data_name == "finqa":
             dataset = load_dataset("dreamerdeo/finqa", split=split, name="main")
             dataset = dataset.select(random.sample(range(len(dataset)), 1000))
-        elif data_name == "tabmwp":
+        elif data_name == "tabmwp" or data_name == "custom":
             examples = []
-            with open(f"{data_dir}/tabmwp/tabmwp_{split}.json", "r") as f:
+            data_file = f"{data_dir}/tabmwp/tabmwp_{split}.json" if data_name == "tabmwp" else f"{data_dir}/custom/test.json"
+            print(data_file)
+            with open(data_file, "r", encoding='ascii') as f:
                 data_dict = json.load(f)
                 examples.extend(data_dict.values())
             dataset = Dataset.from_list(examples)
